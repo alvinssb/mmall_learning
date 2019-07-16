@@ -1,4 +1,4 @@
-package com.mmall.controller.portal;
+package com.mmall.controller.backend;
 
 import com.mmall.common.Const;
 import com.mmall.common.ResponseCode;
@@ -32,7 +32,7 @@ public class CategoryManageController {
     public ServerResponse addCategory(HttpSession session, String categoryName, @RequestParam(value = "parentId",defaultValue = "0") Integer parentId){
         User user=(User)session.getAttribute(Const.CURRENT_USER);
         if(user==null){
-            return ServerResponse.createByErrorCodeMsg(ResponseCode.NEED_LOGIN.getCode(),"User is nog login, please login!");
+            return ServerResponse.createByErrorCodeMsg(ResponseCode.NEED_LOGIN.getCode(),"User is not login, please login!");
         }
         if(iUserService.checkAdminRole(user).isSuccess()){
             return iCategoryService.addCategory(categoryName,parentId);
@@ -45,7 +45,7 @@ public class CategoryManageController {
     public ServerResponse setCategoryName(HttpSession session, Integer categoryId, String categoryName){
         User user=(User)session.getAttribute(Const.CURRENT_USER);
         if(user==null){
-            return ServerResponse.createByErrorCodeMsg(ResponseCode.NEED_LOGIN.getCode(),"User is nog login, please login!");
+            return ServerResponse.createByErrorCodeMsg(ResponseCode.NEED_LOGIN.getCode(),"User is not login, please login!");
         }
         if(iUserService.checkAdminRole(user).isSuccess()){
             return iCategoryService.updateCategoryName(categoryId,categoryName);
@@ -58,7 +58,7 @@ public class CategoryManageController {
     public ServerResponse getChildrenParallelCategory(HttpSession session, @RequestParam(value = "categoryId",defaultValue = "0") Integer categoryId){
         User user=(User)session.getAttribute(Const.CURRENT_USER);
         if(user==null){
-            return ServerResponse.createByErrorCodeMsg(ResponseCode.NEED_LOGIN.getCode(),"User is nog login, please login!");
+            return ServerResponse.createByErrorCodeMsg(ResponseCode.NEED_LOGIN.getCode(),"User is not login, please login!");
         }
         if(iUserService.checkAdminRole(user).isSuccess()){
             return iCategoryService.getChildrenParallelCategory(categoryId);
@@ -71,7 +71,7 @@ public class CategoryManageController {
     public ServerResponse getCategoryAndDeepChildrenCategory(HttpSession session, @RequestParam(value = "categoryId",defaultValue = "0") Integer categoryId){
         User user=(User)session.getAttribute(Const.CURRENT_USER);
         if(user==null){
-            return ServerResponse.createByErrorCodeMsg(ResponseCode.NEED_LOGIN.getCode(),"User is nog login, please login!");
+            return ServerResponse.createByErrorCodeMsg(ResponseCode.NEED_LOGIN.getCode(),"User is not login, please login!");
         }
         if(iUserService.checkAdminRole(user).isSuccess()){
             return iCategoryService.selectCategoryAndChildrenById(categoryId);
